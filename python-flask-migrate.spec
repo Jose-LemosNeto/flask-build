@@ -11,12 +11,11 @@
 %endif
 
 %global modname flask-migrate
-%global sum     SQLAlchemy database migrations for Flask applications using Alembic
 
 Name:               python-flask-migrate
 Version:            2.0.0
 Release:            1%{?dist}
-Summary:            %{sum}
+Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
 URL:                http://pypi.python.org/pypi/flask-migrate
@@ -70,8 +69,9 @@ SQLAlchemy database migrations for Flask applications using Alembic.
 %prep
 %autosetup -n Flask-Migrate-%{version}
 
-# Remove any bundled egg info from upstream
-rm -rf *.egg*
+# For rpmlint
+chmod 0644 flask_migrate/templates/flask-multidb/*
+chmod 0644 flask_migrate/templates/flask/*
 
 %build
 %py2_build
