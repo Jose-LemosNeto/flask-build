@@ -14,7 +14,7 @@
 
 Name:               python-flask-migrate
 Version:            2.0.0
-Release:            2%{?dist}
+Release:            3%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -30,18 +30,25 @@ Summary:            SQLAlchemy database migrations for Flask applications using 
 %{?python_provide:%python_provide python2-%{modname}}
 
 BuildRequires:      python2-devel
-BuildRequires:      python2-setuptools
 
 # TODO - rename these to python2-* once those renames are done.
 BuildRequires:      python-flask
 BuildRequires:      python-alembic
 BuildRequires:      python-flask-script
-BuildRequires:      python2-flask-sqlalchemy
 
 Requires:           python-flask
 Requires:           python-alembic
 Requires:           python-flask-script
+
+%if 0%{?rhel} && 0%{?rhel} <= 7
+BuildRequires:      python-setuptools
+BuildRequires:      python-flask-sqlalchemy
+Requires:           python-flask-sqlalchemy
+%else
+BuildRequires:      python2-setuptools
+BuildRequires:      python2-flask-sqlalchemy
 Requires:           python2-flask-sqlalchemy
+%endif
 
 %description -n python2-%{modname}
 SQLAlchemy database migrations for Flask applications using Alembic.
@@ -107,6 +114,9 @@ chmod 0644 flask_migrate/templates/flask/*
 %endif
 
 %changelog
+* Wed Jan 18 2017 Ralph Bean <rbean@redhat.com> - 2.0.0-3
+- Conditionalize deps for EL7.
+
 * Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 2.0.0-2
 - Rebuild for Python 3.6
 
