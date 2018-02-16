@@ -1,6 +1,7 @@
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} >=7
 %global with_python3 1
 %endif
+
 
 %{!?_licensedir: %global license %%doc}
 
@@ -14,7 +15,7 @@
 
 Name:               python-flask-migrate
 Version:            2.0.0
-Release:            6%{?dist}
+Release:            7%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -54,22 +55,22 @@ Requires:           python2-flask-sqlalchemy
 SQLAlchemy database migrations for Flask applications using Alembic.
 
 %if 0%{?with_python3}
-%package -n python3-%{modname}
+%package -n python%{python3_pkgversion}-%{modname}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
-%{?python_provide:%python_provide python3-%{modname}}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
 
-BuildRequires:      python3-devel
-BuildRequires:      python3-setuptools
-BuildRequires:      python3-flask
-BuildRequires:      python3-flask-sqlalchemy
-BuildRequires:      python3-alembic
-BuildRequires:      python3-flask-script
-Requires:           python3-flask
-Requires:           python3-flask-sqlalchemy
-Requires:           python3-alembic
-Requires:           python3-flask-script
+BuildRequires:      python%{python3_pkgversion}-devel
+BuildRequires:      python%{python3_pkgversion}-setuptools
+BuildRequires:      python%{python3_pkgversion}-flask
+BuildRequires:      python%{python3_pkgversion}-flask-sqlalchemy
+BuildRequires:      python%{python3_pkgversion}-alembic
+BuildRequires:      python%{python3_pkgversion}-flask-script
+Requires:           python%{python3_pkgversion}-flask
+Requires:           python%{python3_pkgversion}-flask-sqlalchemy
+Requires:           python%{python3_pkgversion}-alembic
+Requires:           python%{python3_pkgversion}-flask-script
 
-%description -n python3-%{modname}
+%description -n python%{python3_pkgversion}-%{modname}
 SQLAlchemy database migrations for Flask applications using Alembic.
 %endif
 
@@ -106,7 +107,7 @@ chmod 0644 flask_migrate/templates/flask/*
 %{python2_sitelib}/Flask_Migrate-%{version}*
 
 %if 0%{?with_python3}
-%files -n python3-%{modname}
+%files -n python%{python3_pkgversion}-%{modname}
 %doc README.md
 %license LICENSE
 %{python3_sitelib}/flask_migrate/
@@ -114,6 +115,9 @@ chmod 0644 flask_migrate/templates/flask/*
 %endif
 
 %changelog
+* Fri Feb 16 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2.0.0-7
+- make spec file compatible with epel7
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
