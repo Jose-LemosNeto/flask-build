@@ -15,7 +15,7 @@
 
 Name:               python-flask-migrate
 Version:            2.0.0
-Release:            7%{?dist}
+Release:            8%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -33,13 +33,13 @@ Summary:            SQLAlchemy database migrations for Flask applications using 
 BuildRequires:      python2-devel
 
 # TODO - rename these to python2-* once those renames are done.
-BuildRequires:      python-flask
-BuildRequires:      python-alembic
-BuildRequires:      python-flask-script
+BuildRequires:      python2-flask
+BuildRequires:      python2-alembic
+BuildRequires:      python2-flask-script
 
-Requires:           python-flask
-Requires:           python-alembic
-Requires:           python-flask-script
+Requires:           python2-flask
+Requires:           python2-alembic
+Requires:           python2-flask-script
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
 BuildRequires:      python-setuptools
@@ -115,6 +115,10 @@ chmod 0644 flask_migrate/templates/flask/*
 %endif
 
 %changelog
+* Wed Feb 21 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.0.0-8
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Fri Feb 16 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2.0.0-7
 - make spec file compatible with epel7
 
