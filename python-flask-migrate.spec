@@ -14,8 +14,8 @@
 %global modname flask-migrate
 
 Name:               python-flask-migrate
-Version:            2.0.0
-Release:            8%{?dist}
+Version:            2.1.1
+Release:            1%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -115,6 +115,9 @@ chmod 0644 flask_migrate/templates/flask/*
 %endif
 
 %changelog
+* Sun Apr 15 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2.1.1-1
+- new version
+
 * Wed Feb 21 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.0.0-8
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
