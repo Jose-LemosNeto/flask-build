@@ -15,7 +15,7 @@
 
 Name:               python-flask-migrate
 Version:            2.1.1
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -115,6 +115,9 @@ chmod 0644 flask_migrate/templates/flask/*
 %endif
 
 %changelog
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.1.1-2
+- Rebuilt for Python 3.7
+
 * Sun Apr 15 2018 Itamar Reis Peixoto <itamar@ispbrasil.com.br> - 2.1.1-1
 - new version
 
