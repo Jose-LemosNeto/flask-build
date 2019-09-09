@@ -1,21 +1,8 @@
-%if 0%{?fedora} || 0%{?rhel} >=7
-%global with_python3 1
-%endif
-
-
-%{!?_licensedir: %global license %%doc}
-
-%if 0%{?rhel} && 0%{?rhel} <= 6
-%{!?__python2:        %global __python2 /usr/bin/python2}
-%{!?python2_sitelib:  %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
-%endif
-
 %global modname flask-migrate
 
 Name:               python-flask-migrate
 Version:            2.1.1
-Release:            6%{?dist}
+Release:            7%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -26,35 +13,6 @@ BuildArch:          noarch
 %description
 SQLAlchemy database migrations for Flask applications using Alembic.
 
-%package -n python2-%{modname}
-Summary:            SQLAlchemy database migrations for Flask applications using Alembic
-%{?python_provide:%python_provide python2-%{modname}}
-
-BuildRequires:      python2-devel
-
-# TODO - rename these to python2-* once those renames are done.
-BuildRequires:      python2-flask
-BuildRequires:      python2-alembic
-BuildRequires:      python2-flask-script
-
-Requires:           python2-flask
-Requires:           python2-alembic
-Requires:           python2-flask-script
-
-%if 0%{?rhel} && 0%{?rhel} <= 7
-BuildRequires:      python-setuptools
-BuildRequires:      python-flask-sqlalchemy
-Requires:           python-flask-sqlalchemy
-%else
-BuildRequires:      python2-setuptools
-BuildRequires:      python2-flask-sqlalchemy
-Requires:           python2-flask-sqlalchemy
-%endif
-
-%description -n python2-%{modname}
-SQLAlchemy database migrations for Flask applications using Alembic.
-
-%if 0%{?with_python3}
 %package -n python%{python3_pkgversion}-%{modname}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{modname}}
@@ -72,7 +30,6 @@ Requires:           python%{python3_pkgversion}-flask-script
 
 %description -n python%{python3_pkgversion}-%{modname}
 SQLAlchemy database migrations for Flask applications using Alembic.
-%endif
 
 %prep
 %autosetup -n Flask-Migrate-%{version}
@@ -82,39 +39,26 @@ chmod 0644 flask_migrate/templates/flask-multidb/*
 chmod 0644 flask_migrate/templates/flask/*
 
 %build
-%py2_build
-%if 0%{?with_python3}
 %py3_build
-%endif
 
 %install
-%py2_install
-%if 0%{?with_python3}
 %py3_install
-%endif
 
 # Tests are expecting flaskcli which we don't have packaged.
 #%check
-#%{__python2} setup.py test
-#%if 0%{?with_python3}
 #%{__python3} setup.py test
-#%endif
 
-%files -n python2-%{modname}
-%doc README.md
-%license LICENSE
-%{python2_sitelib}/flask_migrate/
-%{python2_sitelib}/Flask_Migrate-%{version}*
-
-%if 0%{?with_python3}
 %files -n python%{python3_pkgversion}-%{modname}
 %doc README.md
 %license LICENSE
 %{python3_sitelib}/flask_migrate/
 %{python3_sitelib}/Flask_Migrate-%{version}*
-%endif
 
 %changelog
+* Mon Sep 09 2019 Miro Hrončok <mhroncok@redhat.com> - 2.1.1-7
+- Subpackage python2-flask-migrate has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 2.1.1-6
 - Rebuilt for Python 3.8
 
