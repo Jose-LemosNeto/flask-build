@@ -19,10 +19,10 @@ Summary:            SQLAlchemy database migrations for Flask applications using 
 
 BuildRequires:      python%{python3_pkgversion}-devel
 BuildRequires:      python%{python3_pkgversion}-setuptools
-#BuildRequires:      python%{python3_pkgversion}-flask
-#BuildRequires:      python%{python3_pkgversion}-flask-sqlalchemy
-#BuildRequires:      python%{python3_pkgversion}-alembic
-#BuildRequires:      python%{python3_pkgversion}-flask-script
+BuildRequires:      python%{python3_pkgversion}-flask
+BuildRequires:      python%{python3_pkgversion}-flask-sqlalchemy
+BuildRequires:      python%{python3_pkgversion}-alembic
+BuildRequires:      python%{python3_pkgversion}-flask-script
 Requires:           python%{python3_pkgversion}-flask
 Requires:           python%{python3_pkgversion}-flask-sqlalchemy
 Requires:           python%{python3_pkgversion}-alembic
