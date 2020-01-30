@@ -2,7 +2,7 @@
 
 Name:               python-flask-migrate
 Version:            2.1.1
-Release:            7%{?dist}
+Release:            8%{?dist}
 Summary:            SQLAlchemy database migrations for Flask applications using Alembic
 
 License:            MIT
@@ -55,6 +55,9 @@ chmod 0644 flask_migrate/templates/flask/*
 %{python3_sitelib}/Flask_Migrate-%{version}*
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 2.1.1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Mon Sep 09 2019 Miro Hrončok <mhroncok@redhat.com> - 2.1.1-7
 - Subpackage python2-flask-migrate has been removed
   See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
